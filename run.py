@@ -58,8 +58,8 @@ import json
 
 def setup_arguments():
     parser = ArgumentParser(
-        description="Simple script to run the mm binary. By default, this "
-        "scripts expects the mm binary will have ROI annotations and it will "
+        description="Simple script to run a benchmark binary. By default, this "
+        "scripts expects the benchmark binary to have ROI annotations and it will "
         "only return statistics for the ROI."
     )
 
@@ -137,7 +137,6 @@ def setup_arguments():
         type=str
     )
 
-    # add all arguments to the benchmark
     parser.add_argument(
         "--args",
         nargs="*",
@@ -145,22 +144,6 @@ def setup_arguments():
     )
 
     return parser.parse_args()
-
-def print_stats_simple(stats):
-    instructions = int(
-        stats["board"]["processor"]["cores"]["core"]["exec_context.thread_0"][
-            "numInsts"
-        ]["value"]
-    )
-    cycles = int(stats["board"]["processor"]["cores"]["core"]["numCycles"]["value"])
-    ticks = int(
-        stats["simulated_end_time"] - stats["simulated_begin_time"]
-    )  # In 10^-12s (ps)
-
-    print(f"Simulated time (ms): {ticks/1e9:0.5f}")
-    print(f"Executed instructions: {instructions}")
-    print(f"Cycles: {cycles}")
-    print(f"IPC: {instructions/cycles}")
 
 
 def print_stats_ooo(stats):
@@ -247,7 +230,4 @@ if __name__ == "__m5_main__":
     )
     simulator.run()
 
-    if args.processor_type == "simple":
-        print_stats_simple(simulator.get_stats())
-    else:
-        print_stats_ooo(simulator.get_stats())
+    print_stats_ooo(simulator.get_stats())

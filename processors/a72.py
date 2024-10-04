@@ -119,12 +119,20 @@ class A72_MMU(ArmMMU):
     dtb = ArmTLB(entry_type="data", size=32)
 
 
+width = 3
 class A72_Core_Layout(DerivO3CPU):
-    LQEntries = 32
-    SQEntries = 15
-    LSQDepCheckShift = 0
-    LFSTSize = 1024
-    SSITSize = 1024
+
+    # Pipeline widths
+    fetchWidth = 4
+    fetchBufferSize = 16
+    decodeWidth = width
+    renameWidth = width
+    dispatchWidth = width
+    issueWidth = width
+    wbWidth = width
+    commitWidth = width
+    squashWidth = width
+
     decodeToFetchDelay = 1
     renameToFetchDelay = 1
     iewToFetchDelay = 1
@@ -133,32 +141,25 @@ class A72_Core_Layout(DerivO3CPU):
     iewToDecodeDelay = 1
     commitToDecodeDelay = 1
     iewToRenameDelay = 1
-    commitToRenameDelay = 1
     commitToIEWDelay = 1
-    fetchWidth = 4
-    fetchBufferSize = 16
-    fetchToDecodeDelay = 3
-    decodeWidth = 3
-    decodeToRenameDelay = 2
-    renameWidth = 3
-    renameToIEWDelay = 1
-    issueToExecuteDelay = 1
-    dispatchWidth = 3
-    issueWidth = 3
-    wbWidth = 3
-    fuPool = A72_FUPools()
+    commitToRenameDelay = 1
     iewToCommitDelay = 1
     renameToROBDelay = 1
-    commitWidth = 3
-    squashWidth = 3
-    trapLatency = 13
-    backComSize = 5
     forwardComSize = 5
+    backComSize = 5
+
+    LQEntries = 32
+    SQEntries = 15
+    LSQDepCheckShift = 0
     numPhysIntRegs = 64
     numPhysFloatRegs = 126
     numPhysVecRegs = 48
     numIQEntries = 32
     numROBEntries = 128
+
+    trapLatency = 13
+
+    fuPool = A72_FUPools()
 
     switched_out = False
     branchPred = A72_BP()
