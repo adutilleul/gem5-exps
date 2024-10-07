@@ -72,9 +72,9 @@ def setup_arguments():
 
     parser.add_argument(
         "--processor_type",
-        choices=["skylake-verbatim", "skylake-tuned", "a72"],
+        choices=["skylake-verbatim", "a72"],
         help="Simple processor is an in-order single cycle CPU.",
-        default="tuned",
+        default="skylake-verbatim",
     )
 
     parser.add_argument(

@@ -33,48 +33,50 @@ import math
 
 class ADLPPort00(FUDesc):
     opList = [
-        OpDesc(opClass="FloatDiv", opLat=11, pipelined=False),
-        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="FloatSqrt", opLat=12, pipelined=False),
-        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
-        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimAdd", opLat=1, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
         OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=False),
-        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdFloatCvt", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
         OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
         OpDesc(opClass="IntDiv", opLat=15, pipelined=False),
+        OpDesc(opClass="FloatSqrt", opLat=12, pipelined=False),
+        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=False),
         OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=False),
         OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="FloatCvt", opLat=7, pipelined=True)
-    ]
-    count = 1
-    
-class ADLPPort01(FUDesc):
-    opList = [
-        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
-        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
-        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimAdd", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="SimdFloatCmp", opLat=3, pipelined=True),
-        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdFloatAdd", opLat=3, pipelined=True),
         OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdFloatCvt", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=15, pipelined=False),
-        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="FloatCvt", opLat=7, pipelined=True)
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=7, pipelined=True),
+        OpDesc(opClass="FloatDiv", opLat=11, pipelined=False)
     ]
     count = 1
+
+
+class ADLPPort01(FUDesc):
+    opList = [
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatAdd", opLat=3, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=15, pipelined=False),
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=3, pipelined=True),
+        OpDesc(opClass="SimdFloatCvt", opLat=4, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=7, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True)
+    ]
+    count = 1
+
 
 class ADLPPort02(FUDesc):
     opList = [
@@ -83,6 +85,7 @@ class ADLPPort02(FUDesc):
     ]
     count = 1
 
+
 class ADLPPort03(FUDesc):
     opList = [
         OpDesc(opClass="MemRead", opLat=5, pipelined=True),
@@ -90,27 +93,30 @@ class ADLPPort03(FUDesc):
     ]
     count = 1
 
+
 class ADLPPort04(FUDesc):
     opList = [
-        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True),
-        OpDesc(opClass="MemWrite", opLat=12, pipelined=True)
+        OpDesc(opClass="MemWrite", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True)
     ]
     count = 1
 
+
 class ADLPPort05(FUDesc):
     opList = [
-        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
-        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="FloatAdd", opLat=3, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
         OpDesc(opClass="SimdFloatAdd", opLat=3, pipelined=True),
-        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="IntDiv", opLat=15, pipelined=False),
-        OpDesc(opClass="SimdFloatCmp", opLat=3, pipelined=True)
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=3, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatAdd", opLat=3, pipelined=True)
     ]
     count = 1
+
 
 class ADLPPort06(FUDesc):
     opList = [
@@ -120,26 +126,30 @@ class ADLPPort06(FUDesc):
     ]
     count = 1
 
+
 class ADLPPort07(FUDesc):
     opList = [
-        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True),
-        OpDesc(opClass="MemWrite", opLat=12, pipelined=True)
+        OpDesc(opClass="MemWrite", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True)
     ]
     count = 1
+
 
 class ADLPPort08(FUDesc):
     opList = [
-        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True),
-        OpDesc(opClass="MemWrite", opLat=12, pipelined=True)
+        OpDesc(opClass="MemWrite", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True)
     ]
     count = 1
 
+
 class ADLPPort09(FUDesc):
     opList = [
-        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True),
-        OpDesc(opClass="MemWrite", opLat=12, pipelined=True)
+        OpDesc(opClass="MemWrite", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=12, pipelined=True)
     ]
     count = 1
+
 
 class ADLPPort10(FUDesc):
     opList = [
@@ -148,12 +158,15 @@ class ADLPPort10(FUDesc):
         OpDesc(opClass="IntDiv", opLat=15, pipelined=False)
     ]
     count = 1
+
+
 class ADLPPort11(FUDesc):
     opList = [
         OpDesc(opClass="MemRead", opLat=5, pipelined=True),
         OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True)
     ]
     count = 1
+
 
 class ExecUnits(FUPool):
     FUList = [ADLPPort00(), ADLPPort01(), ADLPPort02(), ADLPPort03(), ADLPPort04(), ADLPPort05(), ADLPPort06(), ADLPPort07(), ADLPPort08(), ADLPPort09(), ADLPPort10(), ADLPPort11()]
@@ -184,7 +197,7 @@ class BranchPred(LTAGE):
     tage = LTAGE_BP()
 
 depth = 3
-width = 4
+width = 5
 class GoldenCoveVerbatimCPU(DerivO3CPU):
     """ Uncalibrated: Configured based on micro-architecture documentation """
 

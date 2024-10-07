@@ -1,7 +1,7 @@
 import argparse
 import re
 
-PATTERN_TD = re.compile(r"defm : (\w+)<(\w+),\s*\[([\w, _]+)\],\s*(\d+),")
+PATTERN_TD = re.compile(r"defm : (\w+)<(\w+),\s*\[([\w, _]+)\],\s*(\d+)")
 
 PATTERN2_TD = re.compile(r"def : (\w+)<(\w+),\s*\[([\w, _]+)\]>;")
 
@@ -215,8 +215,11 @@ def main():
     uarch_ports = dict(sorted(uarch_ports.items()))
     # filter out empty ports
     uarch_ports = {k: v for k, v in uarch_ports.items() if len(v.op_list) > 0}
+    # remove divider ports from the list
+    uarch_ports = {k: v for k, v in uarch_ports.items() if "Divider" not in k}
     for port in uarch_ports.values():
         print(port)
+        print("\n")
 
     print("class ExecUnits(FUPool):")
     print("    FUList = [" + ", ".join([f"{port}()" for port in uarch_ports]) + "]")

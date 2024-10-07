@@ -37,7 +37,7 @@ from gem5.components.processors.base_cpu_processor import BaseCPUProcessor
 from gem5.isas import ISA
 from gem5.components.processors.cpu_types import CPUTypes
 
-from processors.skylake import SkylakeVerbatimCPU, SkylakeTunedCPU
+from processors.skylake import SkylakeVerbatimCPU
 
 
 class SkylakeVerbatimCore(BaseCPUCore):
@@ -49,18 +49,6 @@ class SkylakeVerbatimCore(BaseCPUCore):
 
     def __init__(self, core_id):
         super().__init__(core=SkylakeVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
-
-
-class SkylakeTunedCore(BaseCPUCore):
-    """
-    An out of order core for X86.
-    The LSQ depth (split equally between loads and stores), the width of the
-    core, and the number of entries in the reorder buffer are configurable.
-    """
-
-    def __init__(self, core_id):
-        super().__init__(core=SkylakeTunedCPU(cpu_id=core_id), isa=ISA.X86)
-
 
 class SkylakeProcessor(BaseCPUProcessor):
     """
@@ -74,12 +62,6 @@ class SkylakeProcessor(BaseCPUProcessor):
         if cpu_type == "skylake-verbatim":
             skylakecore = [
                 SkylakeVerbatimCore(
-                    core_id=0,
-                )
-            ]
-        elif cpu_type == "skylake-tuned":
-            skylakecore = [
-                SkylakeTunedCore(
                     core_id=0,
                 )
             ]
