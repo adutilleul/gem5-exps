@@ -143,7 +143,7 @@ class SBVerbatimCPU(DerivO3CPU):
 
     fetchBufferSize = 16
     numROBEntries = 224
-    numIQEntries = 128 
+    numIQEntries = 128
     LQEntries = 72
     SQEntries = 56
     numPhysIntRegs = 180

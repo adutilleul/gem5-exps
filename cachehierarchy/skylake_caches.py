@@ -55,14 +55,6 @@ class L1Cache(Cache):
     data_latency = 1
     response_latency = 1
 
-    # Parameters below are not determined yet
-    mshrs = 128
-    tgts_per_mshr = 16
-    write_buffers = 56
-    demand_mshr_reserve = 96
-
-    prefetcher = PIFPrefetcher(prefetch_on_access=True, replacement_policy=TreePLRURP())
-
     def connectBus(self, bus):
         """Connect this cache to a memory-side bus"""
         self.mem_side = bus.cpu_side_ports
@@ -74,6 +66,10 @@ class L1Cache(Cache):
 
 class L1ICache(L1Cache):
     """Simple L1 instruction cache with default values"""
+    prefetcher = PIFPrefetcher(prefetch_on_access=True, replacement_policy=TreePLRURP())
+    mshrs = 2
+    tgts_per_mshr = 8
+
 
     def __init__(self):
         super(L1ICache, self).__init__()
@@ -89,19 +85,12 @@ class L1DCache(L1Cache):
     size = '32kB'
     assoc = 8
 
-    prefetcher = StridePrefetcher()
+    prefetcher = StridePrefetcher(prefetch_on_access=True, degree=8, latency = 1)
+    mshrs = 10
+    tgts_per_mshr = 8
 
-    # Parameters below are not determined yet
-
-    write_allocator = WriteAllocator()
-    write_allocator.coalesce_limit = 2
-    write_allocator.no_allocate_limit = 8
-    write_allocator.delay_threshold = 8
-
-    def __init__(self, l1dwritelatency, l1dmshr, l1dwb):
+    def __init__(self):
         super(L1DCache, self).__init__()
-        self.mshrs = l1dmshr
-        self.write_buffers = l1dwb
 
 
     def connectCPU(self, cpu):
@@ -109,16 +98,17 @@ class L1DCache(L1Cache):
         self.cpu_side = cpu.dcache_port
 
 class MMUCache(Cache):
-    # Default parameters
-    size = '8kB'
-    assoc = 8
-    tag_latency = 1
-    data_latency = 1
+    data_latency = 2
+    tag_latency = 2
     response_latency = 1
-    mshrs = 32
+    mshrs = 6
     tgts_per_mshr = 8
-
-    prefetcher = PIFPrefetcher(prefetch_on_access=True, replacement_policy=TreePLRURP())
+    size = '1536B'
+    assoc = 12
+    write_buffers = 16
+    is_read_only = True
+    # Writeback clean lines as well
+    writeback_clean = True
 
     def __init__(self):
         super(MMUCache, self).__init__()
@@ -139,23 +129,21 @@ class MMUCache(Cache):
 class L2Cache(Cache):
     """Simple L2 Cache with default values"""
     
-    def __init__(self, l2mshr, l2wb):
-        self.mshrs = l2mshr
-        self.write_buffers = l2wb
+    def __init__(self):
         super(L2Cache, self).__init__()
 
-    size = '1MB'
-    assoc = 16
     tag_latency = 14
     data_latency = 14
     response_latency = 1
-
-    tgts_per_mshr = 16
-
+    mshrs = 32
+    tgts_per_mshr = 8
+    size = '256kB'
+    assoc = 4
+    write_buffers = 32
+    clusivity = 'mostly_incl'
     writeback_clean = True
-
-    prefetcher = PIFPrefetcher(prefetch_on_access=True, replacement_policy=TreePLRURP())
-
+    prefetcher = StridePrefetcher(prefetch_on_access=True, degree=8, latency = 1)
+    
     def connectCPUSideBus(self, bus):
         self.cpu_side = bus.mem_side_ports
 
@@ -163,26 +151,17 @@ class L2Cache(Cache):
         self.mem_side = bus.cpu_side_ports
 
 class L3Cache(Cache):
-    """Simple L3 Cache bank with default values
-       This assumes that the L3 is made up of multiple banks. This cannot
-       be used as a standalone L3 cache.
-    """
-
-    # Default parameters
-    size = '512kB'
-    assoc = 8
     tag_latency = 44
     data_latency = 44
     response_latency = 1
-    tgts_per_mshr = 16
-
+    mshrs = 512
+    tgts_per_mshr = 20
+    size = '32MB'
+    assoc = 16
+    write_buffers = 256
     clusivity = 'mostly_excl'
 
-    prefetcher = PIFPrefetcher(prefetch_on_access=True, replacement_policy=TreePLRURP())
-
-    def __init__(self, l3mshr, l3wb):
-        self.mshrs = l3mshr
-        self.write_buffers = l3wb
+    def __init__(self):
         super(L3Cache, self).__init__()
 
     def connectCPUSideBus(self, bus):
