@@ -1,46 +1,46 @@
 class SKXPort0(FUDesc):
     opList = [
-        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
-        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=True),
-        OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
-        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
-        OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="FloatDiv", opLat=11, pipelined=True),
-        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
-        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=True),
         OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
         OpDesc(opClass="FloatSqrt", opLat=12, pipelined=True),
-        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True)
+        OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
+        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True)
     ]
     count = 1
 
 
 class SKXPort1(FUDesc):
     opList = [
-        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
         OpDesc(opClass="IntMult", opLat=4, pipelined=True),
-        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
         OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
         OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
         OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
         OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
-        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
-        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True)
+        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True)
     ]
     count = 1
 
@@ -48,8 +48,8 @@ class SKXPort1(FUDesc):
 class SKXPort2(FUDesc):
     opList = [
         OpDesc(opClass="MemRead", opLat=5, pipelined=True),
-        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
         OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
         OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
     ]
     count = 1
@@ -58,8 +58,8 @@ class SKXPort2(FUDesc):
 class SKXPort3(FUDesc):
     opList = [
         OpDesc(opClass="MemRead", opLat=5, pipelined=True),
-        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
         OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
         OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
     ]
     count = 1
@@ -76,11 +76,11 @@ class SKXPort4(FUDesc):
 class SKXPort5(FUDesc):
     opList = [
         OpDesc(opClass="IntMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
         OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
         OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
         OpDesc(opClass="SimdCmp", opLat=1, pipelined=True)
     ]
     count = 1
@@ -88,8 +88,8 @@ class SKXPort5(FUDesc):
 
 class SKXPort6(FUDesc):
     opList = [
-        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True)
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True)
     ]
     count = 1
 
