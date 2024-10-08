@@ -37,18 +37,30 @@ from gem5.components.processors.base_cpu_processor import BaseCPUProcessor
 from gem5.isas import ISA
 from gem5.components.processors.cpu_types import CPUTypes
 
-from processors.skylake import SkylakeVerbatimCPU
+from processors.skylake import SKLVerbatimCPU, SKXVerbatimCPU
+from processors.goldencove import GLCVerbatimCPU
+from processors.ivybridge import SBVerbatimCPU
 
 
-class SkylakeVerbatimCore(BaseCPUCore):
-    """
-    An out of order core for X86.
-    The LSQ depth (split equally between loads and stores), the width of the
-    core, and the number of entries in the reorder buffer are configurable.
-    """
-
+class SkylakeClientVerbatimCore(BaseCPUCore):
     def __init__(self, core_id):
-        super().__init__(core=SkylakeVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
+        super().__init__(core=SKLVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
+
+
+class SkylakeServerVerbatimCore(BaseCPUCore):
+    def __init__(self, core_id):
+        super().__init__(core=SKXVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
+
+
+class AlderLakePVerbatimCore(BaseCPUCore):
+    def __init__(self, core_id):
+        super().__init__(core=GLCVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
+
+
+class SandyBridgeVerbatimCore(BaseCPUCore):
+    def __init__(self, core_id):
+        super().__init__(core=SBVerbatimCPU(cpu_id=core_id), isa=ISA.X86)
+
 
 class SkylakeProcessor(BaseCPUProcessor):
     """
@@ -59,12 +71,31 @@ class SkylakeProcessor(BaseCPUProcessor):
 
     def __init__(self, cpu_type):
         self._cpu_type = CPUTypes.O3
-        if cpu_type == "skylake-verbatim":
+        if cpu_type == "skl":
             skylakecore = [
-                SkylakeVerbatimCore(
+                SkylakeClientVerbatimCore(
                     core_id=0,
                 )
             ]
+        elif cpu_type == "skx":
+            skylakecore = [
+                SkylakeServerVerbatimCore(
+                    core_id=0,
+                )
+            ]     
+        elif cpu_type == "glc":
+            skylakecore = [
+                AlderLakePVerbatimCore(
+                    core_id=0,
+                )
+            ]  
+        elif cpu_type == "ivb":
+            skylakecore = [
+                SandyBridgeVerbatimCore(
+                    core_id=0,
+                )
+            ]              
+
         else:
             raise Exception("Invalid CPU type")
 

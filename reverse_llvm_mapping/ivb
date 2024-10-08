@@ -1,0 +1,70 @@
+class SBPort0(FUDesc):
+    opList = [
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatSqrt", opLat=14, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=5, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatDiv", opLat=14, pipelined=True),
+        OpDesc(opClass="SimdFloatMult", opLat=5, pipelined=True),
+        OpDesc(opClass="SimdFloatDiv", opLat=14, pipelined=True),
+        OpDesc(opClass="FloatSqrt", opLat=14, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=25, pipelined=True),
+        OpDesc(opClass="FloatMult", opLat=5, pipelined=True)
+    ]
+    count = 1
+
+
+class SBPort1(FUDesc):
+    opList = [
+        OpDesc(opClass="FloatAdd", opLat=3, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=3, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=3, pipelined=True),
+        OpDesc(opClass="SimdFloatAdd", opLat=3, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=5, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True)
+    ]
+    count = 1
+
+
+class SBPort23(FUDesc):
+    opList = [
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
+        OpDesc(opClass="MemRead", opLat=5, pipelined=True)
+    ]
+    count = 1
+
+
+class SBPort4(FUDesc):
+    opList = [
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class SBPort5(FUDesc):
+    opList = [
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True)
+    ]
+    count = 1
+
+
+class ExecUnits(FUPool):
+    FUList = [SBPort0(), SBPort1(), SBPort23(), SBPort4(), SBPort5()]

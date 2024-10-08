@@ -6,14 +6,14 @@ PATTERN_TD = re.compile(r"defm : (\w+)<(\w+),\s*\[([\w, _]+)\],\s*(\d+)")
 PATTERN2_TD = re.compile(r"def : (\w+)<(\w+),\s*\[([\w, _]+)\]>;")
 
 PATTERN_DEF_TD = (
-    r"def : (\w+)<(\w+),\s*\[([\w, _]+)\]>\s*\{[^}]*let\s+Latency\s*=\s*(\d+);\n}"
+    r"def : (\w+)<(\w+),\s*\[([\w, _]+)\]>\s*\{[^}]*let\s+Latency\s*=\s*(\d+);\s*\n?}"
 )
 
 COMBINED_DEF_TD = r"def\s+(\w+)\s*:\s*ProcResGroup<\[\s*([\w,\s]+)\s*\]>;"
 
 RESOURCE_DEF_TD = r"def\s+(\w+)\s*:\s*ProcResource<(\d+)>;"
 
-IS_PIPELINED: dict[str, bool] = dict({"FloatDiv": False, "FloatSqrt": False, "SimdFloatDiv": False, "SimdFloatSqrt": False, "IntDiv": False})
+IS_PIPELINED: dict[str, bool] = dict()
 
 MANUAL_RESOURCES = dict(
     {
@@ -54,10 +54,10 @@ OP_TO_GEM5_OP = dict(
         "WriteFSqrtX": ["SimdFloatSqrt"],
         # Int
         "WriteALU": ["IntAlu"],
-        "WriteIMul32": ["IntMult"],
-        "WriteDiv32": ["IntDiv"],
+        "WriteIMul64": ["IntMult"],
+        "WriteIDiv64": ["IntDiv"],
         # SIMD Int
-        "WriteVecALUX": ["SimAdd"],
+        "WriteVecALUX": ["SimdAdd"],
         "WriteVecLogicX": ["SimdAlu", "SimdCmp"],
         "WriteVecShiftX": ["SimdShift"],
         "WriteVecIMulX": ["SimdMult"],
@@ -65,7 +65,7 @@ OP_TO_GEM5_OP = dict(
         "WriteLoad": ["MemRead", "FloatMemRead"],
         "WriteStore": ["MemWrite", "FloatMemWrite"],
         # Misc
-        "WriteBlend": ["SimdMisc"],
+        "WriteFShuffle": ["SimdMisc"],  # https://uops.info/html-instr/SHUFPS_XMM_XMM_I8.html
     }
 )
 

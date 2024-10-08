@@ -1,0 +1,106 @@
+class SKLPort0(FUDesc):
+    opList = [
+        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="FloatSqrt", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
+        OpDesc(opClass="SimdFloatCvt", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=True),
+        OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort1(FUDesc):
+    opList = [
+        OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
+        OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
+        OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdFloatCvt", opLat=4, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True),
+        OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort2(FUDesc):
+    opList = [
+        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
+        OpDesc(opClass="MemRead", opLat=5, pipelined=True),
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort3(FUDesc):
+    opList = [
+        OpDesc(opClass="FloatMemRead", opLat=5, pipelined=True),
+        OpDesc(opClass="MemRead", opLat=5, pipelined=True),
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort4(FUDesc):
+    opList = [
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort5(FUDesc):
+    opList = [
+        OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
+        OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
+        OpDesc(opClass="IntMult", opLat=4, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort6(FUDesc):
+    opList = [
+        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="IntAlu", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class SKLPort7(FUDesc):
+    opList = [
+        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
+        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
+    ]
+    count = 1
+
+
+class ExecUnits(FUPool):
+    FUList = [SKLPort0(), SKLPort1(), SKLPort2(), SKLPort3(), SKLPort4(), SKLPort5(), SKLPort6(), SKLPort7()]
