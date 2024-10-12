@@ -137,7 +137,7 @@ class L2Cache(Cache):
     response_latency = 1
     mshrs = 32
     tgts_per_mshr = 8
-    size = '1024kB'
+    size = '1048576B'
     assoc = 16
     write_buffers = 32
     clusivity = 'mostly_incl'
@@ -156,7 +156,7 @@ class L3Cache(Cache):
     response_latency = 1
     mshrs = 512
     tgts_per_mshr = 20
-    size = '36608kB'
+    size = '37486592B'
     assoc = 11
     write_buffers = 256
     clusivity = 'mostly_excl'
