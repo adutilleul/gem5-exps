@@ -22,10 +22,10 @@ def SingleChannelNVM_1200(
     return ChanneledMemory(NVM_1200, 1, 64, size=size)
 
 
-def SingleChannelPCM_2400(
+def QuadChannelPCM_2400(
     size: Optional[str] = None,
 ) -> AbstractMemorySystem:
     """
-    A single channel memory system using DDR3_1600_8x8 based DIMM
+    A single channel memory system using DDR4_2400_16x4 based DIMM
     """
-    return ChanneledMemory(DDR4_2400_16x4, 1, 64, size=size)
+    return ChanneledMemory(DDR4_2400_16x4, 4, 64, size=size)

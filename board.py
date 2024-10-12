@@ -27,18 +27,14 @@
 """
 This file defines a simple X86-based board with pre-configured values for the
 memory, cache hierarchy, and processor. This board will only work in gem5's SE
-mode. The clock frequency is 3 GHz for all components. The frequency is
+mode. The clock frequency is 4 GHz for all components. The frequency is
 optionally parameterized.
 
 *Processor*: Single core processor. The core in a single-cycle processor which
 executes every instruction in a single cycle except for memory instructions.
 Instructions are fetched in-order and take at least 1 cycle to be fetched.
 
-*Cache hierarchy*: Two-level hierarchy with 32 KiB split L1 I/D caches and a 
-256 KiB L2 cache. All caches use a simple stride prefetcher. Optionally, the
-L1 and L2 cache sizes are parameterized.
-
-*Memory*: Single channel DDR4 2400 DIMM (32 GiB).
+*Memory*: Quad channel DDR4 2400 DIMM (32 GiB).
 """
 
 from gem5.isas import ISA
@@ -48,7 +44,7 @@ from gem5.components.boards.simple_board import SimpleBoard
 
 from cachehierarchy.three_level_cache_hierarchy import ThreeLevelCacheHierarchy
 
-from memory.single_channel_pcm import SingleChannelPCM_2400
+from memory.single_channel_pcm import QuadChannelPCM_2400
 
 from processor import SkylakeProcessor
 
@@ -56,11 +52,11 @@ from processor import SkylakeProcessor
 class SimpleX86Board(SimpleBoard):
     def __init__(
         self,
-        clock_frequency="3.5GHz",
+        clock_frequency="4.0GHz",
         processor=SimpleProcessor(cpu_type=CPUTypes.TIMING, isa=ISA.X86, num_cores=1),
         cache_hierarchy=ThreeLevelCacheHierarchy(),
     ):
-        memory = SingleChannelPCM_2400("8GiB")
+        memory = QuadChannelPCM_2400("8GiB")
 
         super().__init__(
             clk_freq=clock_frequency,
