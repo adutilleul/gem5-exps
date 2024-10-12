@@ -142,7 +142,7 @@ class L2Cache(Cache):
     response_latency = 1
     mshrs = 32
     tgts_per_mshr = 8
-    sets = 1024
+    size = '1MB'
     assoc = 16
     write_buffers = 32
     clusivity = 'mostly_incl'
@@ -161,7 +161,7 @@ class L3Cache(Cache):
     response_latency = 1
     mshrs = 512
     tgts_per_mshr = 20
-    sets = 36800
+    size = '32MB'
     assoc = 16
     write_buffers = 256
     clusivity = 'mostly_excl'
