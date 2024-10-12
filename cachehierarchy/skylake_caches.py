@@ -156,7 +156,7 @@ class L3Cache(Cache):
     response_latency = 1
     mshrs = 512
     tgts_per_mshr = 20
-    size = '2MB'
+    size = '32MB'
     assoc = 16
     write_buffers = 256
     clusivity = 'mostly_excl'
