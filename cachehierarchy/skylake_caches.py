@@ -49,7 +49,6 @@ class L1Cache(Cache):
     """Simple L1 Cache with default values"""
 
     assoc = 8
-    cacheline_size = 64
     size = '32kB'
 
     tag_latency = 1
@@ -144,13 +143,12 @@ class L2Cache(Cache):
     mshrs = 32
     tgts_per_mshr = 8
     sets = 1024
-    cacheline_size = 64
     assoc = 16
     write_buffers = 32
     clusivity = 'mostly_incl'
     prefetcher = StridePrefetcher(prefetch_on_access=True, degree=8, latency = 1)
     writeback_clean = True
-    
+
     def connectCPUSideBus(self, bus):
         self.cpu_side = bus.mem_side_ports
 
@@ -164,7 +162,6 @@ class L3Cache(Cache):
     mshrs = 512
     tgts_per_mshr = 20
     sets = 36800
-    cacheline_size = 64
     assoc = 16
     write_buffers = 256
     clusivity = 'mostly_excl'
