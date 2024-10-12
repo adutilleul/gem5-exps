@@ -37,21 +37,21 @@ from .intel import *
 class SKXPort0(FUDesc):
     opList = [
         OpDesc(opClass="FloatMult", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=True),
+        OpDesc(opClass="SimdFloatSqrt", opLat=12, pipelined=False),
         OpDesc(opClass="FloatCmp", opLat=4, pipelined=True),
         OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="FloatSqrt", opLat=12, pipelined=True),
+        OpDesc(opClass="FloatSqrt", opLat=12, pipelined=False),
         OpDesc(opClass="SimdFloatCvt", opLat=3, pipelined=True),
         OpDesc(opClass="SimdAdd", opLat=1, pipelined=True),
-        OpDesc(opClass="FloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="FloatDiv", opLat=11, pipelined=False),
         OpDesc(opClass="SimdFloatAdd", opLat=4, pipelined=True),
         OpDesc(opClass="SimdFloatCmp", opLat=4, pipelined=True),
         OpDesc(opClass="SimdFloatMult", opLat=4, pipelined=True),
         OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
-        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=True),
+        OpDesc(opClass="SimdFloatDiv", opLat=11, pipelined=False),
         OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
+        OpDesc(opClass="IntDiv", opLat=47, pipelined=False), # average latency (https://uops.info/html-lat/SKX/DIV_R64-Measurements.html)
         OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
         OpDesc(opClass="SimdMult", opLat=5, pipelined=True)
@@ -71,7 +71,6 @@ class SKXPort1(FUDesc):
         OpDesc(opClass="FloatAdd", opLat=4, pipelined=True),
         OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
         OpDesc(opClass="FloatCvt", opLat=6, pipelined=True),
         OpDesc(opClass="SimdCmp", opLat=1, pipelined=True),
         OpDesc(opClass="SimdMult", opLat=5, pipelined=True),
@@ -115,25 +114,22 @@ class SKXPort5(FUDesc):
         OpDesc(opClass="IntAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdAlu", opLat=1, pipelined=True),
         OpDesc(opClass="SimdShift", opLat=2, pipelined=True),
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
         OpDesc(opClass="SimdMisc", opLat=1, pipelined=True),
         OpDesc(opClass="SimdCmp", opLat=1, pipelined=True)
     ]
     count = 1
 
-
+# ALU
 class SKXPort6(FUDesc):
     opList = [
-        OpDesc(opClass="IntDiv", opLat=102, pipelined=True),
         OpDesc(opClass="IntAlu", opLat=1, pipelined=True)
     ]
     count = 1
 
-
+# AGU, not modeled inside GEM5
 class SKXPort7(FUDesc):
     opList = [
-        OpDesc(opClass="MemWrite", opLat=1, pipelined=True),
-        OpDesc(opClass="FloatMemWrite", opLat=1, pipelined=True)
+
     ]
     count = 1
 
